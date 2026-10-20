@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stan Lokalu：iPhone 和 iPad 上的租房交接单</title>
+<meta name="description" content="在 iPhone 和 iPad 上制作出租房交接与退租单。照片、表计读数、钥匙、屏幕签名，以及可分享的 PDF。">
+<meta property="og:title" content="Stan Lokalu：iPhone 和 iPad 上的租房交接单">
+<meta property="og:description" content="在 iPhone 和 iPad 上制作出租房交接与退租单。照片、表计读数、钥匙、屏幕签名，以及可分享的 PDF。">
+<meta property="og:image" content="https://haker.dev/stanlokalu-public/shots/zh-Hans-1.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#111114">
+<link rel="icon" href="../icon.png">
+<link rel="apple-touch-icon" href="../icon.png">
+<link rel="alternate" hreflang="en" href="https://haker.dev/stanlokalu-public/">
+<link rel="alternate" hreflang="pl" href="https://haker.dev/stanlokalu-public/pl/">
+<link rel="alternate" hreflang="de" href="https://haker.dev/stanlokalu-public/de/">
+<link rel="alternate" hreflang="fr" href="https://haker.dev/stanlokalu-public/fr/">
+<link rel="alternate" hreflang="es" href="https://haker.dev/stanlokalu-public/es/">
+<link rel="alternate" hreflang="it" href="https://haker.dev/stanlokalu-public/it/">
+<link rel="alternate" hreflang="ja" href="https://haker.dev/stanlokalu-public/ja/">
+<link rel="alternate" hreflang="zh-Hans" href="https://haker.dev/stanlokalu-public/zh-Hans/">
+<link rel="alternate" hreflang="x-default" href="https://haker.dev/stanlokalu-public/">
+<link rel="preload" href="../assets/fonts/PlusJakartaSans-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+@font-face{font-family:"Plus Jakarta Sans";font-weight:400;font-display:swap;src:url(../assets/fonts/PlusJakartaSans-Regular.ttf) format("truetype")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:500;font-display:swap;src:url(../assets/fonts/PlusJakartaSans-Medium.ttf) format("truetype")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:700;font-display:swap;src:url(../assets/fonts/PlusJakartaSans-Bold.ttf) format("truetype")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:800;font-display:swap;src:url(../assets/fonts/PlusJakartaSans-ExtraBold.ttf) format("truetype")}
+:root{color-scheme:dark;--bg:#111114;--bg2:#17171b;--card:#1d1d22;--card2:#25252b;--ink:#F4F4F5;--soft:#A5A5AE;--line:rgba(255,255,255,.09);--accent:#FF8A3D;--accent2:#FFB27A;--on:#1A1208;--glow:rgba(255,138,61,.20);--nav:rgba(17,17,20,.72);--ok:#5BD38A;--shadow:0 30px 80px rgba(0,0,0,.55)}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){color-scheme:light;--bg:#F6F3EF;--bg2:#EFEBE6;--card:#FFFFFF;--card2:#F3EFEA;--ink:#1B1B1E;--soft:#62626B;--line:rgba(27,27,30,.10);--accent:#C9560F;--accent2:#E27A33;--on:#FFFFFF;--glow:rgba(201,86,15,.16);--nav:rgba(246,243,239,.78);--shadow:0 30px 70px rgba(40,25,10,.18)}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang SC","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65;-webkit-text-size-adjust:100%;overflow-x:hidden}
+a{color:var(--accent)}img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px;margin:0 auto;padding:56px 24px 40px}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:var(--nav);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:6px;height:68px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;margin-right:auto;letter-spacing:-.01em;white-space:nowrap}
+.brand img{width:34px;height:34px;border-radius:9px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.links{display:flex;gap:2px;align-items:center}
+.links a{color:var(--soft);text-decoration:none;font-weight:700;font-size:14.5px;padding:8px 12px;border-radius:999px;transition:color .2s,background .2s}
+.links a:hover,.links a[aria-current]{color:var(--ink);background:var(--card)}
+.lang{position:relative}
+.lang summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:7px;font-weight:700;font-size:14px;color:var(--soft);padding:8px 12px;border-radius:999px;border:1px solid var(--line)}
+.lang summary::-webkit-details-marker{display:none}.lang summary:hover,.lang[open] summary{color:var(--ink);background:var(--card)}
+.lang .menu{position:absolute;right:0;top:calc(100% + 10px);min-width:180px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:var(--shadow)}
+.lang .menu a{display:block;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;padding:9px 12px;border-radius:10px}.lang .menu a:hover,.lang .menu a[aria-current]{background:var(--card2);color:var(--accent)}
+.cta-s{display:inline-flex;align-items:center;font-weight:800;font-size:14px;color:var(--on);background:var(--accent);padding:10px 18px;border-radius:999px;text-decoration:none;margin-left:8px;white-space:nowrap}
+.cta-s:hover{filter:brightness(1.08)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--accent);color:var(--on);font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 14px 34px var(--glow);transition:transform .2s,filter .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}.btn svg{width:20px;height:20px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}.btn.ghost:hover{background:var(--card)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+/* hero */
+.hero{position:relative;padding:72px 0 40px;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-20% -10% auto 30%;height:900px;background:radial-gradient(closest-side,var(--glow),transparent 72%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--card);border:1px solid var(--line);padding:8px 16px;border-radius:999px;margin-bottom:26px}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--glow)}
+h1{font-size:clamp(38px,5.4vw,68px);line-height:1.04;letter-spacing:-.03em;margin:0 0 24px;font-weight:800;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--soft);max-width:560px;margin:0 0 34px}
+.phones{position:relative;height:640px;display:flex;justify-content:center}
+.phone{position:absolute;width:300px;border-radius:50px;padding:9px;background:linear-gradient(160deg,#3a3a42,#0d0d10);box-shadow:var(--shadow),inset 0 0 0 1.5px rgba(255,255,255,.14)}
+.phone img{border-radius:42px;width:100%}
+.phone.a{left:calc(50% - 250px);top:46px;transform:rotate(-5deg);z-index:2}.phone.b{left:calc(50% - 30px);top:0;transform:rotate(4deg);width:280px}
+/* sections */
+section{padding:92px 0;position:relative}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+h2{font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.025em;margin:0 0 16px;font-weight:800;text-wrap:balance}
+.sub{color:var(--soft);font-size:19px;max-width:620px;margin:0 0 48px}
+.center{text-align:center}.center .sub{margin-left:auto;margin-right:auto}
+.trust{border-block:1px solid var(--line);background:var(--bg2);padding:34px 0}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.trust b{display:block;font-size:20px;letter-spacing:-.01em;margin-bottom:4px}.trust span{color:var(--soft);font-size:14.5px;line-height:1.5;display:block}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:30px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.grid .card:hover{transform:translateY(-4px);border-color:rgba(255,138,61,.4);box-shadow:0 22px 50px rgba(0,0,0,.25)}
+.ico{width:52px;height:52px;border-radius:16px;background:linear-gradient(145deg,var(--glow),transparent);border:1px solid rgba(255,138,61,.28);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:22px}
+.ico svg{width:26px;height:26px}.card h3{font-size:20px;letter-spacing:-.01em;margin:0 0 8px}.card p{margin:0;color:var(--soft);font-size:15.5px}
+.gallery{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 24px 30px;margin:0 -24px;scrollbar-width:thin}
+.gallery img{height:560px;width:auto;border-radius:30px;flex:none;scroll-snap-align:center;box-shadow:var(--shadow);border:1px solid var(--line)}
+.ipad{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center;margin-top:34px}
+.ipad .frame{border-radius:34px;padding:12px;background:linear-gradient(160deg,#3a3a42,#0d0d10);box-shadow:var(--shadow),inset 0 0 0 1.5px rgba(255,255,255,.14)}.ipad .frame img{border-radius:24px;width:100%}
+.ipad h3{font-size:clamp(26px,3vw,38px);letter-spacing:-.02em;line-height:1.15;margin:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:34px 30px;position:relative;overflow:hidden}
+.step:before{counter-increment:s;content:"0" counter(s);position:absolute;right:20px;top:6px;font-size:96px;font-weight:800;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(255,138,61,.35)}
+.step h3{font-size:21px;margin:56px 0 8px;letter-spacing:-.01em;position:relative}.step p{margin:0;color:var(--soft);position:relative}
+.price{max-width:640px;margin:0 auto;border-radius:34px;padding:2px;background:linear-gradient(150deg,var(--accent),rgba(255,138,61,.08) 45%,var(--accent2));box-shadow:0 40px 90px var(--glow)}
+.price .in{background:var(--card);border-radius:32px;padding:46px 44px;text-align:center}
+.tag{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--glow);padding:7px 16px;border-radius:999px;margin-bottom:22px}
+.price h2{font-size:clamp(28px,3.4vw,40px)}.price p.sub{margin:0 auto 28px;font-size:17px}
+.price ul{list-style:none;padding:0;margin:0 0 34px;text-align:left;display:grid;gap:14px;max-width:420px;margin-inline:auto}
+.price li{display:flex;gap:14px;align-items:flex-start;font-weight:700;margin:0}.price li svg{flex:none;width:22px;height:22px;color:var(--ok);margin-top:2px}
+.final{padding:60px 0 110px}.final .box{border-radius:40px;padding:76px 32px;text-align:center;background:radial-gradient(ellipse at 50% 0%,var(--glow),transparent 70%),var(--card);border:1px solid var(--line)}
+.final h2{font-size:clamp(32px,4.4vw,56px);margin-bottom:14px}.final p{color:var(--soft);font-size:19px;margin:0 0 32px}
+.final .btns{justify-content:center}
+footer{border-top:1px solid var(--line);padding:38px 0 54px;color:var(--soft);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}footer a{color:var(--soft);text-decoration:none;font-weight:700}footer a:hover{color:var(--ink)}
+footer .note{flex-basis:100%;font-size:13px;opacity:.85}
+/* podstrony */
+.doc h1{font-size:clamp(34px,5vw,52px);margin-bottom:10px}
+.doc h2{font-size:21px;letter-spacing:-.01em;margin:38px 0 8px}.doc p,.doc li{color:var(--soft)}.doc p{margin:0 0 14px}
+.updated{font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--soft);margin:0 0 26px}
+.doc .card{margin:0 0 24px;color:var(--ink)}.doc .card strong{color:var(--accent)}
+details.q{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:0 22px;margin:0 0 10px;transition:border-color .2s}details.q[open]{border-color:rgba(255,138,61,.4)}
+details.q summary{cursor:pointer;font-weight:700;padding:18px 0;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--ink)}
+details.q summary::-webkit-details-marker{display:none}details.q summary:after{content:"+";color:var(--accent);font-size:24px;line-height:1}details.q[open] summary:after{content:"–"}
+details.q p{margin:0 0 20px}
+/* animacja wejścia */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.btn{transition:none}}
+@media (max-width:1020px){.hero .wrap{grid-template-columns:1fr}.phones{height:560px;margin-top:10px}.grid,.steps{grid-template-columns:1fr 1fr}.trust .wrap{grid-template-columns:1fr 1fr}.ipad{grid-template-columns:1fr}}
+@media (max-width:1020px){.links{display:none}}
+@media (max-width:640px){.grid,.steps,.trust .wrap{grid-template-columns:1fr}.gallery img{height:460px}.price .in{padding:38px 24px}.phone{width:250px}.phone.b{width:230px}.phone.a{left:calc(50% - 205px)}.phone.b{left:calc(50% - 20px)}.phones{height:500px}.cta-s{display:none}section{padding:64px 0}}
+</style>
+<script>document.documentElement.classList.add('js');addEventListener('DOMContentLoaded',()=>{const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');o.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll('.rv').forEach(n=>o.observe(n))})</script>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="index.html"><img src="../icon.png" alt="">Stan Lokalu</a>
+  <nav class="links" aria-label="Main"><a href="index.html#features">功能</a><a href="index.html#screens">界面</a><a href="index.html#how">使用方法</a><a href="index.html#pricing">价格</a><a href="privacy.html">隐私</a><a href="support.html">支持</a></nav>
+  <details class="lang"><summary><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>简体中文</summary><div class="menu"><a href="../index.html" hreflang="en" lang="en">English</a><a href="../pl/index.html" hreflang="pl" lang="pl">Polski</a><a href="../de/index.html" hreflang="de" lang="de">Deutsch</a><a href="../fr/index.html" hreflang="fr" lang="fr">Français</a><a href="../es/index.html" hreflang="es" lang="es">Español</a><a href="../it/index.html" hreflang="it" lang="it">Italiano</a><a href="../ja/index.html" hreflang="ja" lang="ja">日本語</a><a href="index.html" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></div></details>
+  <a class="cta-s" href="https://apps.apple.com/app/id6823101110">在 App Store 下载</a>
+</div></header>
+<main>
+<div class="hero"><div class="wrap">
+  <div>
+    <span class="eyebrow"><i></i>iPhone · iPad · 8 种语言</span>
+    <h1>租房交接单， <em>几分钟搞定。</em></h1>
+    <p class="lead">房产信息只需填写一次。每次租赁都可以用现成的模板完成入住和退房单：照片、表计读数、钥匙以及双方签名。完成后直接分享 PDF。</p>
+    <div class="btns"><a class="btn" href="https://apps.apple.com/app/id6823101110"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>在 App Store 下载</a><a class="btn ghost" href="#how">了解使用方法</a></div>
+  </div>
+  <div class="phones" aria-hidden="true">
+    <div class="phone a"><img src="../shots/zh-Hans-hero-1.jpg" alt="" width="582" height="1262"></div>
+    <div class="phone b"><img src="../shots/zh-Hans-hero-2.jpg" alt="" width="582" height="1262"></div>
+  </div>
+</div></div>
+<div class="trust"><div class="wrap"><div class="rv"><b>8 种语言</b><span>简体中文、英语、德语、法语、西班牙语、意大利语、日语和波兰语</span></div>
+<div class="rv"><b>无需账户</b><span>数据只保存在您的设备或您自己的 iCloud 中</span></div>
+<div class="rv"><b>带签名的 PDF</b><span>照片、读数和双方签名合在一个文件里</span></div>
+<div class="rv"><b>iPhone 和 iPad</b><span>一个应用，各有适配的布局</span></div></div></div>
+<section id="features"><div class="wrap">
+  <p class="kicker rv">功能</p><h2 class="rv">交接所需的一切</h2><p class="sub rv">从第一个房间到签署好的 PDF，流程清晰顺畅。</p>
+  <div class="grid"><div class="card rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M9 11h.01M15 11h.01"/></svg></div><h3>房产信息只需填写一次</h3><p>房间、带序列号的设备、表计和钥匙都保存在模板里。每份交接单都由它生成。</p></div>
+<div class="card rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg></div><h3>状况一键标记</h3><p>每个项目可选正常、注意或缺陷，并可添加备注以及来自相机或相册的照片。</p></div>
+<div class="card rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1116 0"/><path d="M12 15l4-5"/><path d="M6 19h12"/></svg></div><h3>表计和钥匙</h3><p>电表（PPE 编号、封条、时段）、水、燃气和供暖，以及钥匙、遥控器和门卡。</p></div>
+<div class="card rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c2-5 3-9 5-9s1 6 3 6 2-4 4-4 1 3 3 3"/><path d="M3 21h18"/></svg></div><h3>双方在屏幕上签名</h3><p>在同一台设备上依次完成。签署后交接单被锁定，并附上内容的 SHA-256 哈希。</p></div>
+<div class="card rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></div><h3>带照片的 PDF</h3><p>读数、照片和签名合在一个 PDF 中，可通过邮件、AirDrop、信息和文件分享。</p></div>
+<div class="card rv"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></div><h3>可对比的退租</h3><p>并排查看交接时的状况和当前状况、上次读数以及表计用量。</p></div></div>
+</div></section>
+<section id="screens" style="background:var(--bg2)"><div class="wrap">
+  <p class="kicker rv">界面</p><h2 class="rv">实际效果</h2>
+  <div class="gallery"><img src="../shots/zh-Hans-1.jpg" alt="Stan Lokalu 截图 1" loading="lazy">
+<img src="../shots/zh-Hans-2.jpg" alt="Stan Lokalu 截图 2" loading="lazy">
+<img src="../shots/zh-Hans-3.jpg" alt="Stan Lokalu 截图 3" loading="lazy">
+<img src="../shots/zh-Hans-4.jpg" alt="Stan Lokalu 截图 4" loading="lazy">
+<img src="../shots/zh-Hans-5.jpg" alt="Stan Lokalu 截图 5" loading="lazy">
+<img src="../shots/zh-Hans-6.jpg" alt="Stan Lokalu 截图 6" loading="lazy"></div>
+  <div class="ipad rv"><div class="frame"><img src="../shots/zh-Hans-ipad.jpg" alt="Stan Lokalu 截图 iPad" loading="lazy"></div><h3>同样适用于 iPad</h3></div>
+</div></section>
+<section id="how"><div class="wrap">
+  <p class="kicker rv">使用方法</p><h2 class="rv">三个步骤</h2><p class="sub"></p>
+  <div class="steps"><div class="step rv"><h3>房产信息只填一次</h3><p>房间、设备、表计和钥匙都存入模板。</p></div>
+<div class="step rv"><h3>边走边拍</h3><p>一键评估每个项目，添加照片并输入表计读数。</p></div>
+<div class="step rv"><h3>签名并发送 PDF</h3><p>双方在屏幕上签名，交接单随即锁定，PDF 可通过邮件或即时通讯发出。</p></div></div>
+</div></section>
+<section id="pricing" style="background:var(--bg2)"><div class="wrap">
+  <div class="price rv"><div class="in">
+    <span class="tag">Stan Lokalu Pro</span>
+    <h2>一次付费，永久使用。</h2><p class="sub">前两份已签署的交接单免费。之后，一次购买即可解锁其余功能。</p>
+    <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>交接单不限数量</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>iPhone 与 iPad 之间的 iCloud 同步</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>无订阅，无需账户</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>与您的 Apple ID 绑定的一次性购买</span></li></ul>
+    <a class="btn" href="https://apps.apple.com/app/id6823101110"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>在 App Store 下载</a>
+  </div></div>
+</div></section>
+<section class="final"><div class="wrap"><div class="box rv">
+  <h2>准备好第一次交接了吗？</h2><p>下载 Stan Lokalu，今天就完成您的第一份交接单。</p>
+  <div class="btns"><a class="btn" href="https://apps.apple.com/app/id6823101110"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>在 App Store 下载</a></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>© 2026 ideaapps.io</span><a href="privacy.html">隐私</a><a href="support.html">支持</a><a href="https://forms.gle/LVMC8J5p7jYYNexj8">反馈想法或问题</a><span class="note">在屏幕上手绘的签名不属于合格电子签名，本应用也不构成法律意见。</span></div></footer>
+</body>
+</html>
